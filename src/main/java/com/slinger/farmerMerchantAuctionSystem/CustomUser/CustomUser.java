@@ -2,6 +2,7 @@ package com.slinger.farmerMerchantAuctionSystem.CustomUser;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(uniqueConstraints = {
@@ -18,10 +19,15 @@ public class CustomUser {
             strategy = GenerationType.SEQUENCE
     )
     private Integer customUserId;
+    @NotEmpty(message = "username is required")
     private String customUserName;
+
     private Integer customUserNationalId;
+    @NotEmpty(message="email is required")
     private String customUserEmail;
+    @NotEmpty(message="password is required")
     private String customUserPassword;
+    @NotEmpty(message="user role is required")
     private String customUserRole;
 
     public CustomUser() {
