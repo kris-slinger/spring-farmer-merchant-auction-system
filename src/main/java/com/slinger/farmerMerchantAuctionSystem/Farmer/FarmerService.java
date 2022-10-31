@@ -24,7 +24,6 @@ public class FarmerService {
 
                 )
         );
-        CustomUser customUser = farmer.getFarmerCustomUserId();
 
         return farmerRepository.save(farmer);
     }
@@ -36,9 +35,16 @@ public class FarmerService {
         return farmerRepository.findById(farmerId);
     }
 
-
+    public Farmer updateFarmerById(Farmer farmerData,Integer farmerDataId){
+        Farmer farmer = farmerRepository.findById(farmerDataId).orElseThrow(
+                () -> new IllegalStateException(
+                        "Farmer with id " + farmerDataId+" does not exist"
+                )
+        );
+        farmer.setFarmerCustomUserId(farmerData.getFarmerCustomUserId());
+        return farmerRepository.save(farmer);
+    }
     public void deleteFarmerById(Integer farmerId){
         farmerRepository.deleteById(farmerId);
-
     }
 }
