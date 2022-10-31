@@ -37,6 +37,18 @@ public class FarmerController {
         return new ResponseEntity<Optional<Farmer>>(farmerService.getFarmerById(farmerId),HttpStatus.OK);
     }
 
+    @PutMapping(path="{farmerDetailId}")
+    public ResponseEntity<Farmer> updateFarmerById(@PathVariable Integer farmerDetailId,@Valid @RequestBody Farmer farmerDetails){
+        try{
+            return new ResponseEntity<Farmer>(farmerService.updateFarmerById(farmerDetails,farmerDetailId),HttpStatus.OK);
+        }
+        catch (IllegalStateException e){
+            return new ResponseEntity<Farmer>(farmerService.updateFarmerById(farmerDetails,farmerDetailId),HttpStatus.BAD_REQUEST);
+
+        }
+
+    }
+
     @DeleteMapping(path="{farmerId}")
     public ResponseEntity<Farmer> deleteFarmerById(@PathVariable Integer farmerId){
         return new ResponseEntity<Farmer>(HttpStatus.OK);
