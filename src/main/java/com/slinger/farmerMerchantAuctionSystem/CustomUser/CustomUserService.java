@@ -13,7 +13,7 @@ public class CustomUserService {
     public CustomUserService(CustomUserRepository customUserRepository) {
         this.customUserRepository = customUserRepository;
     }
-    public void createUser(CustomUser user){
+    public CustomUser createUser(CustomUser user){
         Optional<CustomUser> emailExists=customUserRepository.findByEmail(user.getCustomUserEmail());
         Optional<CustomUser> userNameExists=customUserRepository.findByName(user.getCustomUserName());
         if(emailExists.isPresent()){
@@ -23,7 +23,7 @@ public class CustomUserService {
             throw new IllegalStateException("userName already taken");
 
         }
-        customUserRepository.save(user);
+        return customUserRepository.save(user);
     }
     public List<CustomUser> getAllUsers(){
         return customUserRepository.findAll();
@@ -31,11 +31,9 @@ public class CustomUserService {
     public Optional<CustomUser> getUserById(Integer id){
         return customUserRepository.findById(id);
     }
-    public void deleteUserById(Integer id){
-        customUserRepository.deleteById(id);
-    }
+
     @Transactional
-    public void updateUser(Integer userId,CustomUser user){
+    public CustomUser updateUser(Integer userId,CustomUser user){
         CustomUser customUser= customUserRepository.findById(userId).orElseThrow(
                 ()-> new IllegalStateException(
                         "User with id"+userId+"does not exist"
@@ -47,6 +45,10 @@ public class CustomUserService {
         customUser.setCustomUserNationalId(user.getCustomUserNationalId());
         customUser.setCustomUserRole(user.getCustomUserRole());
 
+        return customUser;
     }
 
+     public void deleteUserById(Integer id){
+        customUserRepository.deleteById(id);
+     }
 }
