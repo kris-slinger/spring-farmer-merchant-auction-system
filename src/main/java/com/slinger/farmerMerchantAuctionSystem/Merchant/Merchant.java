@@ -11,13 +11,13 @@ public class Merchant {
     private Integer merchantId;
     @OneToOne(targetEntity = CustomUser.class,cascade = CascadeType.REMOVE)
     @JoinColumn(name="merchant_custom_user_id")
-    private  Integer merchantCustomUserId;
-
-    public Merchant(Integer merchantCustomUserId) {
-        this.merchantCustomUserId = merchantCustomUserId;
-    }
+    private  CustomUser merchantCustomUserId;
 
     public Merchant() {
+    }
+
+    public Merchant(CustomUser merchantCustomUserId) {
+        this.merchantCustomUserId = merchantCustomUserId;
     }
 
     public Integer getMerchantId() {
@@ -28,11 +28,11 @@ public class Merchant {
         this.merchantId = merchantId;
     }
 
-    public Integer getMerchantCustomUserId() {
+    public CustomUser getMerchantCustomUserId() {
         return merchantCustomUserId;
     }
 
-    public void setMerchantCustomUserId(Integer merchantCustomUserId) {
+    public void setMerchantCustomUserId(CustomUser merchantCustomUserId) {
         this.merchantCustomUserId = merchantCustomUserId;
     }
 
