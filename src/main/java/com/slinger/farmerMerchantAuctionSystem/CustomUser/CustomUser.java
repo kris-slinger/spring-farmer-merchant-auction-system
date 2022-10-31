@@ -29,7 +29,6 @@ public class CustomUser {
     private String customUserPassword;
     @NotEmpty(message="user role is required")
     private String customUserRole;
-
     public CustomUser() {
     }
 
