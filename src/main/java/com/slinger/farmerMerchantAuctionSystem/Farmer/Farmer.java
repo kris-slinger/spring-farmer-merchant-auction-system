@@ -8,17 +8,15 @@ public class Farmer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Integer farmerId;
-    @OneToOne( targetEntity = CustomUser.class,cascade = CascadeType.REMOVE)
+    @OneToOne( targetEntity = CustomUser.class)
     @JoinColumn(name="farmer_custom_user_id")
-    private  Integer farmerCustomUserId;
-
-
-
-    public Farmer(Integer farmerCustomUserId) {
-        this.farmerCustomUserId = farmerCustomUserId;
-    }
+    private  CustomUser farmerCustomUserId;
 
     public Farmer() {
+    }
+
+    public Farmer(CustomUser farmerCustomUserId) {
+        this.farmerCustomUserId = farmerCustomUserId;
     }
 
     public Integer getFarmerId() {
@@ -29,11 +27,11 @@ public class Farmer {
         this.farmerId = farmerId;
     }
 
-    public Integer getFarmerCustomUserId() {
+    public CustomUser getFarmerCustomUserId() {
         return farmerCustomUserId;
     }
 
-    public void setFarmerCustomUserId(Integer farmerCustomUserId) {
+    public void setFarmerCustomUserId(CustomUser farmerCustomUserId) {
         this.farmerCustomUserId = farmerCustomUserId;
     }
 
