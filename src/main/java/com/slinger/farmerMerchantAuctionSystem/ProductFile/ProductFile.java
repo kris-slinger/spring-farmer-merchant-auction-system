@@ -12,18 +12,14 @@ public class ProductFile {
     private String productFileName;
     private String productFileType;
     private String productFileFile;
-    @OneToOne(targetEntity = Product.class)
-    @JoinColumn(name="product_file_product_id")
-    private Integer productFileProductId;
 
-    public ProductFile(String productFileName, String productFileType, String productFileFile, Integer productFileProductId) {
+    public ProductFile() {
+    }
+
+    public ProductFile(String productFileName, String productFileType, String productFileFile) {
         this.productFileName = productFileName;
         this.productFileType = productFileType;
         this.productFileFile = productFileFile;
-        this.productFileProductId = productFileProductId;
-    }
-
-    public ProductFile() {
     }
 
     public Integer getProductFileId() {
@@ -58,14 +54,6 @@ public class ProductFile {
         this.productFileFile = productFileFile;
     }
 
-    public Integer getProductFileProductId() {
-        return productFileProductId;
-    }
-
-    public void setProductFileProductId(Integer productFileProductId) {
-        this.productFileProductId = productFileProductId;
-    }
-
     @Override
     public String toString() {
         return "ProductFile{" +
@@ -73,7 +61,6 @@ public class ProductFile {
                 ", productFileName='" + productFileName + '\'' +
                 ", productFileType='" + productFileType + '\'' +
                 ", productFileFile='" + productFileFile + '\'' +
-                ", productFileProductId=" + productFileProductId +
                 '}';
     }
 }
