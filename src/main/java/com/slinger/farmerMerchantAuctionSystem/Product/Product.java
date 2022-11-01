@@ -14,32 +14,29 @@ public class Product {
     private Double productPrice;
     private String productDescription;
     private String productLocation;
+
     @ManyToOne(targetEntity = Farmer.class,cascade = CascadeType.REMOVE)
     @JoinColumn(name="product_farmer_id")
-    private Integer productFarmerId;
+    private Farmer productFarmer;
+
     @ManyToOne(targetEntity = ProductCategory.class,cascade =CascadeType.REMOVE)
     @JoinColumn(name="product_category_id")
-    private Integer productCategoryId;
+    private ProductCategory productCategory;
 
+    @OneToOne(targetEntity = Product.class)
+    @JoinColumn(name="product_file_product_id")
+    private Product productFile;
     public Product() {
     }
 
-    public Product(String productName, Double productPrice, String productDescription, String productLocation, Integer productFarmerId, Integer productCategoryId) {
+    public Product(String productName, Double productPrice, String productDescription, String productLocation, Farmer productFarmer, ProductCategory productCategory, Product productFile) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.productDescription = productDescription;
         this.productLocation = productLocation;
-        this.productFarmerId = productFarmerId;
-        this.productCategoryId = productCategoryId;
-    }
-
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+        this.productFarmer = productFarmer;
+        this.productCategory = productCategory;
+        this.productFile = productFile;
     }
 
     public String getProductName() {
@@ -74,21 +71,30 @@ public class Product {
         this.productLocation = productLocation;
     }
 
-    public Integer getProductFarmerUserId() {
-        return productFarmerId;
+    public Farmer getProductFarmer() {
+        return productFarmer;
     }
 
-    public void setProductFarmerUserId(Integer productFarmerId) {
-        this.productFarmerId = productFarmerId;
+    public void setProductFarmer(Farmer productFarmer) {
+        this.productFarmer = productFarmer;
     }
 
-    public Integer getProductCategoryId() {
-        return productCategoryId;
+    public ProductCategory getProductCategory() {
+        return productCategory;
     }
 
-    public void setProductCategoryId(Integer productCategoryId) {
-        this.productCategoryId = productCategoryId;
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
     }
+
+    public Product getProductFile() {
+        return productFile;
+    }
+
+    public void setProductFile(Product productFile) {
+        this.productFile = productFile;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -97,9 +103,9 @@ public class Product {
                 ", productPrice=" + productPrice +
                 ", productDescription='" + productDescription + '\'' +
                 ", productLocation='" + productLocation + '\'' +
-                ", productFarmerId=" + productFarmerId +
-                ", productCategoryId=" + productCategoryId +
+                ", productFarmer=" + productFarmer +
+                ", productCategory=" + productCategory +
+                ", productFile=" + productFile +
                 '}';
     }
-
 }
